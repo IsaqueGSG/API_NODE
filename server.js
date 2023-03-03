@@ -7,9 +7,6 @@ App.use( express.urlencoded( {extended: true} )) //para receber parametros via p
 
 App.use( express.static( path.resolve( __dirname, 'public')))
 
-App.set('views', path.resolve( __dirname, 'src', 'views' ) ) //setando as views
-App.set('view engine', 'ejs')
-
 App.use(routes)// usando rotes.js
 
 App.listen(port = 3000, ()=>{

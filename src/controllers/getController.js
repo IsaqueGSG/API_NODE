@@ -2,11 +2,13 @@ const con = require('../models/connectionMysql')
 
 module.exports = (req, res)=>{
 
-    const id = req.params.id
+    const id = parseInt( req.params.id)
+    let sql = 'SELECT * FROM api_teste'
 
+    if(id) sql = "SELECT * FROM api_teste where id= " + id 
+        
     con.connect();
-
-    con.query('SELECT * FROM api_teste' ,  (error, results, fields)=>{
+    con.query( sql ,  (error, results, fields)=>{
         error ? false : true;
         res.send(
             results
