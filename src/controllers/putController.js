@@ -1,16 +1,13 @@
-const con = require('../models/connectionMysql')
-
-module.exports = (req, res)=>{
-    const id = parseInt( req.params.id)
-    const cpf = req.body.cpf
-    const nome = req.body.nome
-
-    con.connect();
-    con.query(`UPDATE api_teste SET Nome= '${nome}', CPF= '${cpf}' WHERE ID= ${id}`,  (error, results, fields)=>{
-        error ? false : true;
-        res.send(
-            results
-        )
-    })
-    con.end()
+const Pessoa = require('../models/pessoaModel');
+module.exports = async(req, res)=>{
+    const pessoa = await Pessoa.findByPk( req.params.id )
+    pessoa.nome = req.body.nome
+    pessoa.cpf = req.body.cpf
+    await pessoa.save()
+    res.json(
+        {
+            msg: 'registro atualizado',
+            pessoa
+        }
+    )
 }

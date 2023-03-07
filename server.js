@@ -5,8 +5,6 @@ const path = require('path')
 
 App.use( express.urlencoded( {extended: true} )) //para receber parametros via post, put
 
-App.use( express.static( path.resolve( __dirname, 'public')))
-
 App.use(routes)// usando rotes.js
 
 App.listen(port = 3000, ()=>{

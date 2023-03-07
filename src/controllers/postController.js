@@ -1,15 +1,12 @@
-const con = require('../models/connectionMysql')
+const path = require('path')
+const database = require('../models/database');
+const Pessoa = require('../models/pessoaModel');
+database.sync();
 
-module.exports = (req, res)=>{
-    const nome = req.body.nome;
-    const cpf = req.body.cpf;
-
-    con.connect();
-    con.query(`INSERT INTO api_teste ( cpf, nome) VALUES ( '${cpf}' , '${nome}' )` ,  (error, results, fields)=>{
-        error ? false : true;
-        res.send(
-            results
-        )
+module.exports = async (req, res)=>{
+    const pessoa = await Pessoa.create({
+        nome: req.body.nome,
+        cpf: req.body.cpf
     })
-    con.end()
+    res.json( {msg: 'registo inserido', pessoa} )
 }

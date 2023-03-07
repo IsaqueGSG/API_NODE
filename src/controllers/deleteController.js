@@ -1,14 +1,6 @@
-const con = require('../models/connectionMysql')
+const Pessoa = require('../models/pessoaModel');
 
-module.exports = (req, res)=>{
-    const id = parseInt( req.params.id)
-
-    con.connect();
-    con.query(`DELETE FROM api_teste WHERE id= ${id}` ,  (error, results, fields)=>{
-        error ? false : true;
-        res.send(
-            results
-        )
-    })
-    con.end()
+module.exports = async (req, res)=>{
+    await Pessoa.destroy( {where: { id: req.params.id } })
+    res.json( { msg: `Registro de id ${ req.params.id } excluido` } )
 }
