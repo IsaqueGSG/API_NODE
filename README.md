@@ -4,4 +4,5 @@
 * NodeJS
 * express
 * mysql
-* serialize ( no proximo refactory )
+* serialize 
+
