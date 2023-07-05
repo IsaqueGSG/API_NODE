@@ -1,11 +1,11 @@
 const Pessoa = require('../models/pessoaModel');
-module.exports = async (req, res)=>{
-    try{
 
-        const id = parseInt( req.params.id)
-        const result_get =  id ?  await Pessoa.findByPk(id) : await Pessoa.findAll()
-        res.json( result_get )
-    }catch(e){
-        console.log(e)
-    }
-}
+module.exports = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const resultGet = id ? await Pessoa.findByPk(id) : await Pessoa.findAll();
+    res.json(resultGet);
+  } catch (e) {
+    res.json({ e });
+  }
+};

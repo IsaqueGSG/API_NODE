@@ -1,21 +1,21 @@
 const Sequelize = require('sequelize');
-const database = require( './database');
+const database = require('../config/database');
 
-const Pessoa = database.define('Pessoa', {
-    id: {
-        type: Sequelize.INTEGER,
-        autoIncrement: true,
-        allowNull: false,
-        primaryKey: true
-    },
-    nome: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    cpf: {
-        type: Sequelize.STRING,
-        allowNull: false
-    }
-})
+const Pessoa = database.define('pessoa', {
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    allowNull: false,
+    primaryKey: true,
+  },
+  nome: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  cpf: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+});
 
-module.exports = Pessoa ;
+module.exports = Pessoa;
