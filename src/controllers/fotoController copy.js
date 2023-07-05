@@ -2,19 +2,12 @@ const multer = require('multer');
 
 const database = require('../config/database');
 const multerConfig = require('../config/multerConfig');
-const Foto = require('../models/fotoModel');
 
 database.sync();
 
 const upload = multer(multerConfig).single('foto');
 
-module.exports = async (req, res) => upload(req, res, async (err) => {
-  if (err) {
-    return res.status(400).json({
-      errors: [err.code],
-    });
-  }
-
+module.exports = async (req, res) => {
   try {
     const { originalname, filename } = req.file;
     // eslint-disable-next-line camelcase
@@ -24,6 +17,6 @@ module.exports = async (req, res) => upload(req, res, async (err) => {
 
     return res.json(foto);
   } catch (e) {
-    return res.status(400).json({ e });
+    res.json({ e });
   }
-});
+};
