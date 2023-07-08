@@ -8,7 +8,7 @@ database.sync();
 
 const upload = multer(multerConfig).single('foto');
 
-module.exports = async (req, res) => upload(req, res, async (err) => {
+exports.store = async (req, res) => upload(req, res, async (err) => {
   if (err) {
     return res.status(400).json({
       errors: [err.code],
@@ -17,12 +17,11 @@ module.exports = async (req, res) => upload(req, res, async (err) => {
 
   try {
     const { originalname, filename } = req.file;
-    // eslint-disable-next-line camelcase
-    const { id_pessoa } = req.body;
-    // eslint-disable-next-line camelcase
-    const foto = await Foto.create({ id_pessoa, originalname, filename });
+    const { pessoaId } = req.body;
 
-    return res.json(foto);
+    const foto = await Foto.create({ pessoaId, originalname, filename });
+
+    return res.json({ foto, pessoaId });
   } catch (e) {
     return res.status(400).json({ e });
   }

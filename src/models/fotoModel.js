@@ -33,7 +33,7 @@ const Foto = database.define('foto', {
 
 Foto.belongsTo(Pessoa, {
   constraint: true,
-  foreignKey: 'id_pessoa',
+  foreignKey: 'pessoaId',
   onDelete: 'CASCADE',
 });
 

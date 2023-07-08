@@ -2,17 +2,16 @@ const express = require('express');
 
 const route = express.Router();
 
-const getController = require('../controllers/getController');
-const deleteController = require('../controllers/deleteController');
-const postController = require('../controllers/postController');
-const putController = require('../controllers/putController');
+const pessoaController = require('../controllers/pessoaController');
 const fotoController = require('../controllers/fotoController');
 
-// Rotas API
-route.post('/', postController);
-route.get('/:id?', getController);
-route.put('/:id', putController);
-route.delete('/:id', deleteController);
-route.post('/fotos', fotoController);
+// Rotas Pessoa
+route.post('/', pessoaController.store);
+route.get('/:id?', pessoaController.get);
+route.put('/:id', pessoaController.update);
+route.delete('/:id', pessoaController.delete);
+
+// Rotas Fotos
+route.post('/fotos', fotoController.store);
 
 module.exports = route;
