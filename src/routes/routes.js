@@ -13,5 +13,8 @@ route.delete('/:id', pessoaController.delete);
 
 // Rotas Fotos
 route.post('/fotos', fotoController.store);
+route.get('/fotos/:id?', fotoController.get);
+route.put('/fotos/:id', fotoController.update);
+route.delete('/fotos/:id', fotoController.delete);
 
 module.exports = route;
